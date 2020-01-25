@@ -6,10 +6,11 @@
 * PostgreSQL == 12.1
 
 # Text
-0. 以下内容请参考《SQL基础教程(MICK著)》第8-1章。
+## 0. 参考来源
+ 以下内容请参考《SQL基础教程(MICK著)》第8-1章。
 
 
-1. 预备知识
+## 1. 预备知识
 
 1).数据准备(后续更新)
 ```PostgreSQL
@@ -56,7 +57,7 @@ select product_id,product_name,sale_price,
  ```
  
  
-2. 问题来源
+## 2. 问题来源
 前文代码运行正常，但是在《SQL基础教程》P267中，将关键字‘following’替换成‘preceding’后(即改为当前记录及其后2行)，并不能出现P268的查询结果。
 ```PostgreSQL
 select product_id,product_name,sale_price,
@@ -90,7 +91,7 @@ select product_id,product_name,sale_price,
 (8 行记录)
 ```
 
-3.问题解决
+## 3.问题解决
   通过ERROR提示与between...and...结构的反思，推测出问题根源来自当前行(current row)。
   
 1).假设计算移动平均中第一种方法(仅使用关键字preceding)省略了between...and...结构，则笔者尝试将源代码补全为：
@@ -140,7 +141,7 @@ select product_id,product_name,sale_price,
 
  问题解决。
 
-4.原问题上的思考。
+## 4.原问题上的思考。
 Q：between A and B 结构中的A，B是否存在顺序
  
 A：存在。
@@ -157,7 +158,7 @@ ERROR:  frame starting from current row cannot have preceding rows
 ```
 同理：第二种与第三种互换后出错。
 
-5.总结
+## 5.总结
 在计算移动平均时
 1).仅使用关键字preceding时，完整语法为：rows between n preceding and current row
                               可简化为：rows n preceding
