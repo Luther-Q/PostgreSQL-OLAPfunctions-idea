@@ -3,10 +3,8 @@
 
 
 # Requirements
-----
 * PostgreSQL == 12.1
 
 
 # Author
-----
 * Luther Q，tczhangzhi
